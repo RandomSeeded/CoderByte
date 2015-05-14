@@ -1,0 +1,17 @@
+<html>
+<script>
+
+function FirstReverse(str) {  
+   var arr = [];
+   // note: we initially tried to reverse in place, but it turns out that all string operations return a new string, so that is pointless. So we might as well make our own
+   for (i = 0; i < str.length; i++) {
+      arr[i] = str.charAt(str.length-i-1);
+   }
+   str = arr.join("");
+   return str;
+}
+FirstReverse("Reverse Me");
+
+
+</script>
+</html>

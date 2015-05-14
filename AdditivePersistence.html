@@ -1,0 +1,34 @@
+<html>
+<script>
+
+// recursive
+// we return the number of times we add the digits until we reach a single digit
+function AddPers(num) {
+   // this is just going to call the other function and initialize a (global) var for us
+   var counter = 0;
+   return AdditivePersistence(num, counter);
+}
+function AdditivePersistence(num, counter) {
+   // if the number is a single digit, we stop
+   if (String(num).length == 1) return counter;
+
+   // otherwise, we add the digits together into a new number and recurse
+   else {
+      counter++;
+      var str = String(num);
+      var runningTotal = 0;
+      for (var i = 0; i < str.length; i++) {
+         runningTotal += Number(str.charAt(i));
+      }
+      return AdditivePersistence(runningTotal, counter);
+   }
+}
+// NOTE : we could have still done this in just one method if we were willing to add a parameter to our function call. But if we must follow the exact definition as given to us in the problem, this works too
+
+console.log(AddPers(2718));
+console.log(AddPers(4));
+console.log(AddPers(19));
+console.log(AddPers(12));
+
+</script>
+</html>

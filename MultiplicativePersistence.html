@@ -1,0 +1,30 @@
+<html>
+<script>
+
+function MultiplicativePersistence(num, counter) {
+   // initialize counter for our first run through
+   if (typeof counter == "undefined") {
+      var counter = 0;
+   }
+
+   // if the number is a single digit, we stop
+   if (String(num).length == 1) return counter;
+
+   // otherwise, we multiply the digits together into a new number and recurse
+   else {
+      counter++;
+      var str = String(num);
+      var runningProduct = 1;
+      for (var i = 0; i < str.length; i++) {
+         runningProduct = runningProduct * Number(str.charAt(i));
+      }
+      return MultiplicativePersistence(runningProduct, counter);
+   }
+}
+
+console.log(MultiplicativePersistence(39));
+console.log(MultiplicativePersistence(4));
+console.log(MultiplicativePersistence(25));
+
+</script>
+</html>

@@ -1,0 +1,26 @@
+<html>
+<script>
+
+function SimpleSymbols(str) {
+   // in order to return true, each letter must be surrounded by a + symbol
+   for (i = 0; i < str.length; i++) {
+      // theres probably more efficient ways to do this, but this is very clean
+      var charCode = str.charCodeAt(i);
+      if (isLetter(charCode)) {
+         if (!(isPlus(str.charCodeAt(i-1)) && isPlus(str.charCodeAt(i+1)))) return false;
+      }
+   }
+   return true;
+}
+function isLetter(char) {
+   return (char >= 65 && char <= 90) || (char >= 97 && char <= 122);
+}
+function isPlus(char) {
+   return char == 43;
+}
+
+console.log(SimpleSymbols("+d+=3=+s+"));
+console.log(SimpleSymbols("f++d+"));
+
+</script>
+</html>

@@ -1,0 +1,18 @@
+<html>
+<script>
+
+function SwapCase(str) {
+   buildStr = "";
+   for (var i = 0; i < str.length; i++) {
+      if (str.charAt(i).toUpperCase() == str.charAt(i))
+         buildStr += str.charAt(i).toLowerCase();
+      else buildStr += str.charAt(i).toUpperCase();
+   }
+   return buildStr;
+}
+
+console.log(SwapCase("Hello-LOL"));
+console.log(SwapCase("Sup DUDE!!?"));
+
+</script>
+</html>

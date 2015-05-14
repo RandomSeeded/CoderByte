@@ -1,0 +1,17 @@
+<html>
+<script>
+
+function ExOh(str) {
+   var numX = 0;
+   var numO = 0;
+   for (i = 0; i < str.length; i++) {
+      if (str.charAt(i) == "x") numX++;
+      else if (str.charAt(i) == "o") numO++;
+   }
+   return numX == numO;
+}
+console.log(ExOh("xooxxo"));
+console.log(ExOh("x"));
+
+</script>
+</html>

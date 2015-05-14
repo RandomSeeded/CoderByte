@@ -1,0 +1,32 @@
+<html>
+<script>
+
+function DivisionStringified(num1, num2) {
+   // are they just rounding up?
+   // Answer: sometimes they are rounding up (2/3 -> 1)
+   // and sometimes they are rounding down (123456789 / 10000 -> 12345)
+   // So thats stupid. Lets just round to nearest integer here.
+   var result = String(Math.round(num1 / num2));
+   var builtStr = "";
+   for (i = result.length-1; i >= 0; i--) {
+      // after every three digits
+      // what is the test for three digits from the end?
+      // Last position (length - 1) to i is three
+      if ((result.length-1 - i) % 3 == 0 && i != result.length-1) {
+         builtStr = ","+builtStr;
+      }
+      builtStr = result.charAt(i)+builtStr;
+   }
+   return builtStr;
+}
+console.log(DivisionStringified(123456789,10000));
+console.log(DivisionStringified(8,8));
+console.log(DivisionStringified(5,2));
+console.log(DivisionStringified(42,1));
+console.log(DivisionStringified(420,1));
+console.log(DivisionStringified(4200,1));
+console.log(DivisionStringified(6874,67));
+console.log(DivisionStringified(123456789,10));
+
+</script>
+</html>

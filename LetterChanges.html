@@ -1,0 +1,24 @@
+<html>
+<script>
+
+function LetterChanges(str) {
+   var newStr = [];
+   for (i = 0; i < str.length; i++) {
+      var charCode = str.charCodeAt(i);
+      if (charCode == 90) charCode = 65; // Turn Z into A
+      else if (charCode == 122) charCode = 97; // Turn z into a
+      else if ((charCode >= 65 && charCode <= 90) || (charCode >= 97 && charCode <= 122)) { // Increment only letters
+         charCode = charCode+1;
+      }
+      var newLetter = String.fromCharCode(charCode);
+      if (newLetter == "a" || newLetter == "e" || newLetter == "i" || newLetter == "o" || newLetter == "u") newLetter = newLetter.toUpperCase();
+      newStr[i] = newLetter;
+   }
+   str = newStr.join("");
+   return str;
+}
+
+console.log(LetterChanges("Argument goes here"));
+
+</script>
+</html>

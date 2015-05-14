@@ -1,0 +1,43 @@
+<html>
+<script>
+
+/*
+Steps:
+   - get the two times from the combined string
+   - separate the times into hours, numbers, and suffix
+   - turn those times into minutevalues after midnight
+   - get the difference between them (if time2 > time1) or the rollover diff (else)
+*/
+
+
+function CountingMinutesI(str) {
+   var time1 = str.substring(0,str.indexOf("-"));
+   var time2 = str.substring(str.indexOf("-")+1);
+
+   time1 = convertToMins(time1);
+   time2 = convertToMins(time2);
+
+   if (time2 > time1) { return time2 - time1; }
+   else {
+      time2 += 1440;
+      return time2 - time1;
+   }
+}
+
+function convertToMins(str) {
+   var hours = Number(str.substring(0, str.indexOf(":")));
+   if (hours == 12) hours = 0;
+   var mins = Number(str.substr(str.indexOf(":")+1,2));
+   var isPM = str.substring(str.indexOf(":")+3) == "pm";
+
+   var totalMinutes = 60*hours + mins + (12*isPM*60);
+   return totalMinutes;
+}
+
+console.log(CountingMinutesI("12:30pm-12:00am"));
+console.log(CountingMinutesI("1:23am-1:08am"));
+console.log(CountingMinutesI("9:00am-10:00am"));
+console.log(CountingMinutesI("1:00pm-11:00am"));
+
+</script>
+</html>

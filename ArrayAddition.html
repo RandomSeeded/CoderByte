@@ -1,0 +1,40 @@
+<html>
+<script>
+
+function ArrayAdditionI(arr) {
+   var max = arr.reduce(function(a,b) {
+      if (a >= b) return a;
+      else return b;
+   });
+   return ArrSum(arr, max, max);
+}
+
+function ArrSum(arr, target, max) {
+   // OK so here is our recursive function
+   // We want to test all possible combinations of using or not using each element in the array to reach the target sum
+   // So for the first element, our options are:
+      // 1) arr[0] + ArrSum(arr[1 thru end], target - arr[0])
+      // 2) ArrSum(arr[1 thru end, target)
+   // NOTE: you will have to handle the one special case of the sequence MAX [no further additions] being erroneously counted as true
+
+   var arrCopy = arr.slice(); // we do this because shift edits the actual object in mememory, so each shift on the orig array would remove the element from BOTH branches (whoops)
+
+   // Failure case (may need editing)
+   if (arrCopy.length == 0)  return false;
+   var element = arrCopy.shift();
+
+   // Success case
+   if (element == target && element != max) { 
+      // element != max put in there to handle the special case of not taking [max + nothing else] as true
+      return true;
+   }
+
+   // More elements to check cases: 
+   return (ArrSum(arrCopy, target - element, max) || ArrSum(arrCopy, target, max));
+}
+console.log(ArrayAdditionI([3,5,-1,8,12]));
+console.log(ArrayAdditionI([12,3,5,-1,8]));
+console.log(ArrayAdditionI([5,7,16,1,2]));
+
+</script>
+</html>

@@ -1,0 +1,22 @@
+<html>
+<script>
+
+// lets do this recursively
+// NOTE: if we wanted to say that 1 was a power of 2 (2^0), then we could have the success case just be num == 1, it would work just as well
+function PowersOfTwo(num) {
+   // success
+   if (num == 2) return true;
+
+   // failure
+   else if (num < 2) return false;
+
+   // continuation
+   else return PowersOfTwo(num / 2);
+}
+
+console.log(PowersOfTwo(8));
+console.log(PowersOfTwo(16));
+console.log(PowersOfTwo(22));
+
+</script>
+</html>

@@ -1,0 +1,50 @@
+<html>
+<script>
+
+// Function takes the array of numbers stored in arr and returns the second lowest and second greatest numbers, separated by a space. 
+// Steps:
+// 1) sort the array from lowest to highest
+// 2) remove any repeats from the array
+// 3) Take the 2nd from beginning and second from end
+//
+// Eh. Turns out removing repeats from arrays is not an easy operation (what if there are more than 2? Becomes tricky)
+// Easier way:
+// 1) sort the array
+// 2) take the second lowest (go from beginning) and second highest (go from end)
+
+function SecondGreatLow(arr) {
+   //sort (normal sort is alphabetic, we specify our own numeric)
+   arr.sort(function(a,b) {
+      if (a == b) return 0;
+      else if (a < b) return -1;
+      else return 1;
+   });
+
+   // get second lowest: the first value not equivalent to the lowest
+   var lowest = arr[0];
+   var secondLowest = null;
+   for (var i = 1; i < arr.length; i++) {
+      if (arr[i] != lowest) {
+         secondLowest = arr[i];
+         break;
+      }
+   }
+
+   // get second highest: the first value not equivalent to the highest;
+   var highest = arr[arr.length-1];
+   var secondHighest = null;
+   for (var i = arr.length-1; i >= 0; i--) {
+      if (arr[i] != highest) {
+         secondHighest = arr[i];
+         break;
+      }
+   }
+   return secondLowest+ " "+secondHighest;
+}
+
+console.log(SecondGreatLow([7, 7, 12, 98, 106]));
+console.log(SecondGreatLow([1,42,42,180]));
+console.log(SecondGreatLow([4, 90]));
+
+</script>
+</html>

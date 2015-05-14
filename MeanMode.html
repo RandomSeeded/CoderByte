@@ -1,0 +1,37 @@
+<html>
+<script>
+
+function MeanMode(arr) {
+   var mean = arr.reduce(function(a,b) {
+      return a+b;
+   }) / arr.length;
+
+   var countMap = {};
+   var mode = 0;
+   var numMode = 0;
+   for (var i = 0; i < arr.length; i++) {
+      // increment the count seen
+      if (arr[i] in countMap) {
+         countMap[arr[i]] += 1;
+      }
+      // initialize count seen for nums we havent seen before
+      else {
+         countMap[arr[i]] = 1;
+      }
+      
+      // store value as mode if most seen
+      if (countMap[arr[i]] > numMode) {
+         numMode = countMap[arr[i]];
+         mode = arr[i];
+      }
+   }
+   return mean==mode;
+}
+
+console.log(MeanMode([5,3,3,1]));
+console.log(MeanMode([1,2,3]));
+console.log(MeanMode([4,4,4,6,2]));
+console.log(MeanMode([4,4,6,1,2]));
+
+</script>
+</html>

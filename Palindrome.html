@@ -1,0 +1,16 @@
+<html>
+<script>
+
+function Palindrome(str) {
+   var stripped = str.replace(/ /g,"");
+   for (i = 0; i < Math.floor(stripped.length / 2); i++) {
+      if (stripped.charAt(i) != stripped.charAt(stripped.length-i-1)) return false;
+   }
+   return true;
+}
+console.log(Palindrome("never odd or even"));
+console.log(Palindrome("eye"));
+console.log(Palindrome("not a pal"));
+
+</script>
+</html>

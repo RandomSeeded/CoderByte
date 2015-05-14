@@ -1,0 +1,30 @@
+<html>
+<script>
+
+function LongestWord(sen) {
+   var words = sen.split(" ");
+
+   // Easy way first
+   /*
+   var maxLength = 0;
+   var maxAt = 0;
+   for (i = 0; i < words.length; i++) {
+      if (words[i].length > maxLength) {
+         maxLength = words[i].length;
+         maxAt = i;
+      }
+   }
+   sen = words[maxAt];
+   */
+
+   // Now for the hard (but fun!) way
+   sen = words.reduce(function(a,b) {
+      if (a.length >= b.length) return a;
+      else return b;
+   });
+   return sen;
+}
+console.log(LongestWord("I love dogs"));
+
+</script>
+</html>

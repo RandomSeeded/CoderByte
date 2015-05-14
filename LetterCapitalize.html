@@ -1,0 +1,17 @@
+<html>
+<script>
+
+function LetterCapitalize(str) {
+   var words = str.split(" ");
+   for (i = 0; i < words.length; i++) {
+      var upperFirstChar = words[i].charAt(0).toUpperCase();
+      words[i] = upperFirstChar.concat(words[i].slice(1));
+   }
+   str = words.join(" ");
+   return str;
+}
+
+console.log(LetterCapitalize("hello world"));
+
+</script>
+</html>

@@ -1,0 +1,18 @@
+<html>
+<script>
+
+function ABCheck(str) {
+   // Although not stated, spaces are ignored. TRIM EM OUT
+   str = str.replace(" ","");
+   for (i = 0; i < str.length; i++) {
+      if ((str.charAt(i) == "a" && str.charAt(i+3) == "b")
+         || (str.charAt(i) == "b" && str.charAt(i+3) == "a")) { return true; }
+   }
+   return false;
+}
+
+console.log(ABCheck("after badly"));
+console.log(ABCheck("Laura Sobs"));
+
+</script>
+</html>

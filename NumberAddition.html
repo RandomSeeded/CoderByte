@@ -1,0 +1,33 @@
+<html>
+<script>
+
+function NumberAddition(str) {
+   var nums = [];
+   var curNumStr = "";
+   for (var i = 0; i < str.length; i++) {
+      // if the current character is a number
+      if (str.charCodeAt(i) >= 48 && str.charCodeAt(i) <= 57) {
+         curNumStr += str.charAt(i);
+      }
+
+      // if the current character is not a number but is following a number
+      else if (curNumStr != "") {
+         nums.push(Number(curNumStr));
+         curNumStr = "";
+      }
+
+      // if we have reached the end of the string and we have a number (note: we could put this as an or in the prev else if)
+      if (i == str.length-1 && curNumStr != "")
+      {
+         nums.push(Number(curNumStr));
+      }
+   }
+   return nums.reduce(function(a,b) { return a+b; });
+}
+
+console.log(NumberAddition("88Hello 3World!"));
+console.log(NumberAddition("75Number9"));
+console.log(NumberAddition("10 2One Number*1*"));
+
+</script>
+</html>

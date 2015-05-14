@@ -1,0 +1,43 @@
+<html>
+<script>
+
+function LetterCountI(str) {
+   // returns the word with the most number of repeated letters
+   var words = str.split(" ");
+   // IMPORTANT TAKEAWAY: if you dont put 'var' in front of your i = 0 declaration, it is GLOBAL. (Whoops)
+   var maxRepeats = 0;
+   var maxWord = "";
+   for (var i = 0; i < words.length; i++) {
+      numRepeats = numRepeatLetters(words[i]);
+      if (numRepeats > maxRepeats) {
+         maxRepeats = numRepeats;
+         maxWord = words[i];
+      }
+   }
+   return maxWord;
+}
+
+function numRepeatLetters(str) {
+   // counts the number of repeat letters in a given word
+   var letterCount = {};
+   for (var i = 0; i < str.length; i++) {
+      if (str.charAt(i) in letterCount) {
+         letterCount[str.charAt(i)] += 1;
+      }
+      else letterCount[str.charAt(i)] = 1;
+   }
+
+   // NOTE: it would be slightly faster to keep track of the maximum as we go along
+   // However, this is also a good opportunity to review how to go over the things we've placed in a map, so we're going to calculate the max separately
+   var maxLC = 0;
+   for (var lc in letterCount) {
+      if (letterCount[lc] > maxLC) {
+         maxLC = letterCount[lc];
+      }
+   }
+   return maxLC;
+}
+console.log(LetterCountI("Hello apple pie bookkeeper"));
+
+</script>
+</html>

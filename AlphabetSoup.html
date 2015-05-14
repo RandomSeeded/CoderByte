@@ -1,0 +1,18 @@
+<html>
+<script>
+
+function AlphabetSoup(str) {
+   var chars = str.split("");
+   var sorted = chars.sort(function(a,b) {
+      if (a.toLowerCase() == b.toLowerCase()) return 0;
+      else if (a.toLowerCase() < b.toLowerCase()) return -1;
+      else return 1;
+   });
+   str = sorted;
+   return str;
+}
+
+console.log(AlphabetSoup("Hello"));
+
+</script>
+</html>

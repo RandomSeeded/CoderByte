@@ -1,0 +1,34 @@
+<html>
+<script>
+
+function ArithGeo(arr) {
+   var isArith = true;
+   var isGeo = true;
+   for (i = 1; i < arr.length; i++) {
+      // if neither arith or geo, break and return
+      if (!isArith && !isGeo) return -1; 
+
+      // create arithmetic and geometric factors for first instance
+      if (i == 1) {
+         diff = arr[i] - arr[i-1];
+         div = arr[i] / arr[i-1];
+      }
+      // if factors have changed, mark the booleans
+      else {
+         var tempDiff = arr[i] - arr[i-1];
+         var tempDiv = arr[i] / arr[i-1];
+         if (tempDiff != diff) isArith = false;
+         if (tempDiv != div) isGeo = false;
+      }
+   }
+   if (isArith) return "Arith";
+   else if (isGeo) return "Geo";
+}
+
+console.log(ArithGeo([1,2,3,4,5]));
+console.log(ArithGeo([5,10,15]));
+console.log(ArithGeo([2,4,8,16]));
+console.log(ArithGeo([2,4,16,24]));
+
+</script>
+</html>
