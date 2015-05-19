@@ -1,0 +1,27 @@
+<html>
+<script>
+
+// wwwggopp -> 3w2g1o2p
+function RunLength(str) {
+   var lastChar = "";
+   var numRepeats = 0;
+   var outputStr = "";
+   for (var i = 0; i < str.length; i++) {
+      // repeat of same character
+      if (str.charAt(i) === lastChar) { numRepeats++; }
+
+      // new character
+      else {
+         if (numRepeats) { outputStr = outputStr + numRepeats + lastChar; } // dont output for first char of our string
+         lastChar = str.charAt(i);
+         numRepeats = 1;
+      }
+   }
+   outputStr += numRepeats + lastChar; // add final sequence
+   return outputStr;
+}
+
+console.log(RunLength("wwwggopp"));
+
+</script>
+</html>

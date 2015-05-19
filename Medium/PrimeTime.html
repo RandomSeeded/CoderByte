@@ -1,0 +1,17 @@
+<html>
+<script>
+
+function primeTime(num) {
+   for (var i = 2; i <= Math.floor(num/2); i++) {
+      if (num % i === 0) return false;
+   }
+   return true;
+}
+
+console.log(primeTime(7));
+console.log(primeTime(17));
+console.log(primeTime(34));
+console.log(primeTime(4));
+
+</script>
+</html>

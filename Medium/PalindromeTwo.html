@@ -1,0 +1,19 @@
+<html>
+<script>
+
+function PalindromeTwo(str) {
+   // first we remove all spaces/punctuation: with regular expression removing anything except A-Z or a-z
+   var trimmedStr = str.replace(/[^A-Za-z]/g,'').toLowerCase();
+   console.log(trimmedStr);
+   for (var i = 0; i < Math.floor(trimmedStr.length/2); i++) {
+      if (trimmedStr.charAt(i) !== trimmedStr.charAt(trimmedStr.length-1-i)) { return false; }
+   }
+   return true;
+}
+
+console.log(PalindromeTwo("test1234---"));
+console.log(PalindromeTwo("Noel - sees Leon"));
+console.log(PalindromeTwo("A war at Tarawa!"));
+
+</script>
+</html>

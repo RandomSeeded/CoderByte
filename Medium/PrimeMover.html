@@ -1,0 +1,30 @@
+<html>
+<script>
+
+// return the nth prime number
+function PrimeMover(num) {
+   // 1 is first, 2 is second, 3 is third
+   var numPrimesFound = 0;
+   var counter = 0;
+   for (counter = 1; numPrimesFound < num; counter++) {
+      if (isPrime(counter)) { 
+         numPrimesFound++; 
+      }
+   }
+   return counter-1;
+}
+
+function isPrime(num) {
+   for (var i = 2; i <= Math.floor(num/2); i++) {
+      if (num % i === 0) return false;
+   }
+   return true;
+}
+
+console.log(PrimeMover(3));
+console.log(PrimeMover(4));
+console.log(PrimeMover(5));
+console.log(PrimeMover(6));
+
+</script>
+</html>

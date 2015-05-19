@@ -1,0 +1,38 @@
+<html>
+<script>
+
+function GreatestCommonFactor(num1, num2) {
+   // not very cool but easy and faster
+   var greatestCommonFactor = 1;
+   for (var i = 1; i < Math.min(num1, num2); i++) {
+      if (num1 % i === 0 && num2 % i === 0) { greatestCommonFactor = i; }
+   }
+   return greatestCommonFactor;
+
+/*
+   // cool but slow and harder to code and generally worse in every way code: 
+   var factorList1 = getFactors(num1, [1]);
+   var factorList2 = getFactors(num2, [1]);
+
+   // recursive function that gives us all the factors of the number
+   function getFactors(num, factorList) {
+      for (var i = 2; i <= num / 2; i++ ) {
+         // if there exist any factors of num, recurse (add these to the factor list as well)
+         if (num % i === 0) {
+            factorList = getFactors(num / i, factorList);
+            factorList = getFactors(i, factorList);
+         }
+      }
+      // add num to the factor list. NOTE: this is not a list only of prime factors
+      if (factorList.indexOf(num) === -1) { factorList.push(num); }
+      return factorList;
+   }
+
+   // now you just find largest in both arrays
+*/
+}
+
+console.log(GreatestCommonFactor(36, 54));
+
+</script>
+</html>
