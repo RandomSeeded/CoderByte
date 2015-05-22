@@ -1,0 +1,34 @@
+<html>
+<script>
+
+// assignment: return decimal form of the binary value
+// Examples:
+// 101 -> 5
+   // (1*1) + (2 * 0) + (4*1)
+// 1000 -> 8
+   // (1*0) + (2 * 0) + (4 * 0) + (8*1)
+
+// Take 2
+function reduceBinary(str) {
+   return str.split("").reduce(function(sum, value, i) {
+      return sum + (Math.pow(2,(str.length-1-i)) * Number(value));
+   }, 0);
+}
+
+// Take 1
+function binaryConverter(str) {
+   var sum = 0;
+   for (i = str.length-1; i >= 0; i--) {
+      sum+= (Math.pow(2,(str.length-1-i)) * Number(str.charAt(i)));
+   }
+   return sum;
+}
+console.log(binaryConverter("1000"));
+console.log(binaryConverter("101"));
+console.log(binaryConverter("100101"));
+console.log(reduceBinary("1000"));
+console.log(reduceBinary("101"));
+console.log(reduceBinary("100101"));
+
+</script>
+</html>

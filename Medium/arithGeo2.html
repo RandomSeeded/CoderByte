@@ -1,0 +1,54 @@
+<html>
+<script>
+
+// Using the JavaScript language, have the function ArithGeoII(arr) take the array of numbers stored in arr and return the string "Arithmetic" if the sequence follows an arithmetic pattern or return "Geometric" if it follows a geometric pattern. 
+// If the sequence doesn't follow either pattern return -1. An arithmetic sequence is one where the difference between each of the numbers is consistent, where as in a geometric sequence, each term after the first is multiplied by some constant or common ratio. 
+// Arithmetic example: [2, 4, 6, 8] and Geometric example: [2, 6, 18, 54]. Negative numbers may be entered as parameters, 0 will not be entered, and no array will contain all the same elements. 
+function arithGeoII(arr) {
+   if (isArith(arr)) return "Arithmetic";
+   else if (isGeo(arr)) return "Geometric";
+   return -1;
+
+   function isGeo(arr) {
+      var prevDiv = arr[1] / arr[0];
+      for (var i = 2; i < arr.length; i++) {
+         if (arr[i] / arr[i-1] != prevDiv) return false;
+      }
+      return true;
+   }
+
+   function isArith(arr) {
+      var prevDiff = arr[1] - arr[0];
+      for (var i = 2; i < arr.length; i++) {
+         if (arr[i] - arr[i-1] != prevDiff) return false;
+      }
+      return true;
+   }
+/*
+   // Cant you write a better arithmetic function?? Not sure this is cleaner, whoops =/
+   function cleanArith(arr) {
+      var diff;
+      return arr.reduce(function(allArith, element, idx, arr) {
+         if (idx != 0) {
+            // second element
+            if (typeof diff == "undefined") {
+               diff = arr[idx] - arr[idx-1];
+            }
+            // all others
+            else {
+               allArith = (diff == arr[idx]-arr[idx-1]);
+               return allArith;
+            }
+         }
+         return allArith;
+      }, true);
+   }
+*/
+}
+
+console.log(arithGeoII([1,2,3,100]));
+console.log(arithGeoII([2,4,6,8]));
+console.log(arithGeoII([2,4,8,16]));
+
+</script>
+</html>

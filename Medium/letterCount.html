@@ -1,0 +1,43 @@
+<html>
+<script>
+
+// return the first word with the greatest number of repeated letters
+function letterCount(str) {
+   var words = str.split(" ");
+   return words.reduce(function(maxWord, word) {
+/*      if (word.length > maxWord.length) return word;
+      else return maxWord;*/
+      // We can rewrite the above as: (ternary operator)
+      return (word.length > maxWord.length) ? word : maxWord;
+   });
+
+}
+function maxRepeats(word) {
+   // Original attempt:
+/*   return (word.split('').sort().join('').match(/([^])\1+/g) || []);*/
+   // not quite what's being asked for.
+   // This is giving us the number of letters that repeat at least once
+   // But we're really interested in the number of times any letter repeats:
+   return (word.split('').sort().join('').match(/([^])\1+/g) || []).reduce(function(maxLength, elem) {
+      return Math.max(elem.length, maxLength);
+   }, -1);
+
+   // How does this work?
+   // We turn the word into an array, sort so that repeats are next to each other, turn it back into a string so we can apply regular expressions to it
+   // We then look for any characters that repeat at least once, and save their value into the match array (which will look something like ["aaa","bb"])
+   // We then take the maximum length of any of the elements in that array
+}
+
+console.log(maxRepeats("Hello"));
+console.log(maxRepeats("apple"));
+console.log(maxRepeats("words"));
+console.log(maxRepeats("aabbcc"));
+console.log(maxRepeats("aaaabbc")); 
+console.log("----------------------------------------");
+console.log(letterCount("Hello world"));
+console.log(letterCount("Hello apple pie"));
+console.log(letterCount("Today is the greatest day ever!"));
+
+
+</script>
+</html>
