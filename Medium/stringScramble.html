@@ -1,0 +1,46 @@
+<html>
+<script>
+
+// return true if a portion of string 1's characters can be rearranged to match str2
+function stringScramble(str1, str2) {
+   // another way of phrasing that:
+   // does every letter in str2 appear in str1
+   // and does every letter in str2 appear at least as many times in str1 as it does in str2
+   return compareLetterCounts(genLetterCounts(str1), genLetterCounts(str2));
+
+   // Check to see if every letter in str2 is in str1 using our letterCount objects
+   function compareLetterCounts(lc1, lc2) {
+      var allLettersPresent = true;
+      for (var property in lc2) {
+         if (lc2.hasOwnProperty(property)) {
+            allLettersPresent = allLettersPresent && (lc1[property] >= lc2[property]);
+         }
+      }
+      return allLettersPresent;
+   }
+
+   // Generate Letter Counts Option 2: use reduce. I like reduce.
+   function genLetterCounts(string) {
+      return string.split("").reduce(function(lcObj, letter) {
+         lcObj[letter] = (lcObj[letter]+1) || 1;
+         return lcObj;
+      }, {});
+   }
+
+   // Generate Letter Counts Option 1: go through each letter w/ charAt
+/*   function genLetterCounts(string) {
+      var letterCounts = {};
+      for (var i = 0; i < string.length; i++) {
+         var letter = string.charAt(i);
+         if (typeof letterCounts[letter] === "undefined") { letterCounts[letter] = 1; }
+         else letterCounts[letter]++;
+      }
+      return letterCounts;
+   }*/
+}
+console.log(stringScramble("coder","cdoer"));
+console.log(stringScramble("rkqodlw", "world"));
+console.log(stringScramble("h3llko", "hello"));
+
+</script>
+</html>
