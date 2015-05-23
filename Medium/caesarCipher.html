@@ -1,0 +1,31 @@
+<html>
+<script>
+
+function caesarCipher(str, num) {
+   var cipheredStr = "";
+   for (var i = 0; i < str.length; i++) {
+      var letter = str.charAt(i);
+      var newLetter = String.fromCharCode(str.charCodeAt(i)+num);
+      // Case 1: alphabetic, no rollover
+      if ((letter.match(/[a-z]/) && newLetter.match(/[a-z]/))
+         || (letter.match(/[A-Z]/) && newLetter.match(/[A-Z]/))) {
+         cipheredStr += newLetter;
+      }
+      // Case 2: alphabetic, rollover
+      else if (letter.match(/[a-z]/i)) {
+         cipheredStr += String.fromCharCode(str.charCodeAt(i)+num-26);
+      }
+      // Case 3: non-alphabetic
+      else cipheredStr += letter;
+   }
+   return cipheredStr;
+}
+console.log(caesarCipher("Caesar Cipher",2));
+console.log(caesarCipher("Caesar CipherZz",2));
+/*console.log("A".charCodeAt(0));
+console.log("Z".charCodeAt(0));
+console.log("a".charCodeAt(0));
+console.log("z".charCodeAt(0));*/
+
+</script>
+</html>

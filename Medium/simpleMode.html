@@ -1,0 +1,30 @@
+<html>
+<script>
+
+// many ways we could go about this
+// sorted way wont work out because we want to return the one that comes first. Ugh. Fine, we store them as properties. 
+function simpleMode(arr) {
+   var modeCounts = {};
+   var maxVal = -1;
+   var maxCount = 0;
+
+   // Cleaner version
+   for (var i = 0; i < arr.length; i++) {
+      var num = arr[i];
+      // increment the count for this number
+      modeCounts[num] = modeCounts[num]+1 || 1;
+
+      // store as mode 
+      if (modeCounts[num] > maxCount) {
+         maxCount = modeCounts[num];
+         maxVal = num;
+      }
+   }
+   return maxVal;
+}
+
+console.log(simpleMode([10,4,5,2,4]));
+console.log(simpleMode([1,1,2,2,3,4,5]));
+
+</script>
+</html>
