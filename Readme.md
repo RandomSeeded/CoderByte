@@ -1,1 +1,1 @@
-Coderbyte easy challenges answered in JavaScript
+Coderbyte challenges answered in JavaScript
