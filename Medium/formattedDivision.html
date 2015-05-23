@@ -1,0 +1,30 @@
+<html>
+<script>
+
+function formattedDivision(num1, num2) {
+   var result = Math.round(num1 / num2 * 10000) / 10000;
+
+   var leftOfDecimal = String(Math.floor(result));
+   var rightOfDecimal = String(result).replace(leftOfDecimal,"").replace(".","");
+
+   // edit left side: insert comma every three digits from right
+   var newLeftOfDec = "";
+   for (var i = leftOfDecimal.length-1; i >= 0; i--) {
+      if ((leftOfDecimal.length-1-i) % 3 === 0 && i !== leftOfDecimal.length-1) { newLeftOfDec = ","+newLeftOfDec; }
+      newLeftOfDec = leftOfDecimal.charAt(i) + newLeftOfDec;
+   }
+   leftOfDecimal = newLeftOfDec;
+
+   // edit right side: pad to 4 zeros
+   while (rightOfDecimal.length < 4) {
+      rightOfDecimal = rightOfDecimal.concat("0");
+   }
+   return console.log(leftOfDecimal+"."+rightOfDecimal);
+}
+console.log(formattedDivision(1,1));
+console.log(formattedDivision(2,3));
+console.log(formattedDivision(3,2));
+console.log(formattedDivision(1000000,2));
+
+</script>
+</html>
