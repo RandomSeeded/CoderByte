@@ -1,0 +1,58 @@
+<html>
+<script>
+
+// Assignment: Take a number, and return 1 if any arrangement of num is prime, otherwise return 0
+function primeChecker(num) {
+   // Exercise for sanity: if you turn your function into a variable storing a function, how do you use it
+   var primeFnAsVariable = function(num) {
+      for (var i = 2; i <= num/2; i++) {
+         if (num % i === 0) { return false; }
+      }
+      return true;
+   };
+
+   var possiblePrimes = genPermutations(String(num).split(""));
+   for (var i = 0; i < possiblePrimes.length; i++) {
+/*      if (primeFnAsVariable(Number(possiblePrimes[i]))) return true;*/
+      if (isPrime(Number(possiblePrimes[i]))) return true;
+      // The above two lines are EXACTLY THE SAME. No difference in how we use. Note though that b/c the as-a-var version is a statement, it must be called first.
+   }
+   return false;
+
+
+   function isPrime(num) {
+      for (var i = 2; i <= num/2; i++) {
+         if (num % i === 0) { return false; }
+      }
+      return true;
+   }
+
+}
+console.log(primeChecker(910));
+console.log(primeChecker(12));
+/*console.log(genPermutations([9,1,0]));
+console.log(genPermutations([1,0,9]));*/
+
+// This generate permutation step taken from permutationStep.html [prev assignment]
+function genPermutations(digits) {
+   // base case: single digit
+   if (digits.length === 1) { return [digits[0]]; }
+
+   var permutations = [];
+   // continuation case: multiple digits. Working
+   for (var i = 0; i < digits.length; i++) {
+      var otherDigits = digits.slice(0); otherDigits.splice(i, 1);
+
+      // recurse: generate sub-permutations
+      var subPermutations = genPermutations(otherDigits);
+
+      // add to return array
+      subPermutations.forEach(function(value) {
+         permutations.push(String.concat(digits[i],value));
+      });
+   }
+   return permutations;
+}
+
+</script>
+</html>

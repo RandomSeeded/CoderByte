@@ -3,16 +3,22 @@
 
 // Assignment:  Using the JavaScript language, have the function PermutationStep(num) take the num parameter being passed and return the next number greater than num using the same digits. For example: if num is 123 return 132, if it's 12453 return 12534. If a number has no greater permutations, return -1 (ie. 999). 
 
-// Take 3: can we just use a formula or something??
+// NOTE: later found a potential problem with this: at various points in the middle you could have 09 (number) -> 9 (incorrect). 
+// Need minor modification to store as string throughout [DONE]
+// Other issue: need to handle ties better (nodup our sort) [DONE]
+// Now it's messier :(
 
 // Take 2: same idea, just trying it clean
 function permutationStep(num) {
    // get all permutations and sort
-   var permutations = genPermutations(String(num).split("")).sort(function(a, b) {
-      return a > b;
-   });
+   var permutations = genPermutations(String(num).split(""))
+      .sort(function(a, b) { 
+         return Number(a) > Number(b); 
+      }) // sorted 
+      .filter(function(value, idx, arr) { return arr[idx] !== arr[idx-1]; }); // filtered to remove duplicates
+
    // return 1 step up, or -1 if there are no higher permutations
-   return permutations[permutations.indexOf(num)+1] || -1;
+   return Number(permutations[permutations.indexOf(String(num))+1]) || -1;
 }
 function genPermutations(digits) {
    // base case: single digit
@@ -28,17 +34,22 @@ function genPermutations(digits) {
 
       // add to return array
       subPermutations.forEach(function(value) {
-         permutations.push(Number(digits[i]+""+value));
+         permutations.push(String.concat(digits[i],value));
       });
    }
    return permutations;
 }
-/*console.log(genPermutations([1,2,3]));*/
-/*console.log(genPermutations([1,2]));*/
-/*console.log(genPermutations([1,2,3]));*/
-console.log(permutationStep(123));
+/*console.log(genPermutations([1,2,3]));
+console.log(genPermutations([1,2]));
+console.log(genPermutations([1,2,3]));
+console.log(genPermutations([1,0,3]));*/
+/*console.log(permutationStep(122));*/
+/*console.log(permutationStep(123));
 console.log(permutationStep(321));
 console.log(permutationStep(12453));
+console.log(permutationStep(109));*/
+/*console.log(genPermutations([1,0,9]));*/
+console.log(permutationStep(109));
 
 /* Generating all permutations is hard.
 // Take 1: lets do it the brute force way

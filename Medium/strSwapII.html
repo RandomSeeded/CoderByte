@@ -1,0 +1,56 @@
+<html>
+<script>
+
+function swapII(str) {
+   var newStr = "";
+   for (var i = 0; i <= str.length; i++) {
+      var letter = str.charAt(i);
+      if (letter.match(/[a-z]/)) { newStr+= letter.toUpperCase(); }
+      else if (letter.match(/[A-Z]/)) { newStr+= letter.toLowerCase(); }
+      else newStr += letter;
+   }
+
+   // OK it turns out that it's not easy to replace a character within a string. So, array time
+   // The below could be folded into the above, you'd just need to do appropriate arr/str/num conversions
+   var prevIdx = -1;
+   var strArr = newStr.split("");
+   for (var i = 0; i < strArr.length; i++) {
+      var letter = strArr[i];
+      // case 1: letter is a number
+      if (letter.match(/[0-9]/)) {
+         if (prevIdx !== -1) {
+            var prevVal = newStr[prevIdx];
+            strArr[prevIdx] = letter;
+            strArr[i] = prevVal;
+            prevIdx = -1;
+         }
+         else { prevIdx = i; }
+      }
+      // case 2: letter is neither a number nor alphabetic: considered a separator
+      else if (!letter.match(/[a-z0-9]/i)) {
+         prevIdx = -1;
+      }
+   }
+
+   return strArr.join("");
+}
+console.log(swapII("6Hello4 -8World, 7 yes3"));
+
+/* YE OLDE CODE */
+   // Then, if a letter is between two numbers (without separation), switch the places of the two numbers. You could do this in the same iteration...but it's complicated enough we'll make it its own step for now
+/*   var prevIdx = -1;
+   for (var i = 0; i < newStr.length; i++) {
+      var letter = newStr.charAt(i);
+      // case 1: letter is a number
+      if (letter.match(/[0-9]/)) {
+         if (prevIdx !== -1) {
+            var prevVal = newStr.charAt(i);
+            newStr.replace
+         }
+      }
+      // case 2: letter is alphabetic
+      // case 3: letter is a separator
+   }*/
+
+</script>
+</html>
