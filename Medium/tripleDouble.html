@@ -1,0 +1,33 @@
+<html>
+<script>
+
+// Assignment: http://coderbyte.com/CodingArea/GuestEditor.php?ct=Triple%20Double&lan=JavaScript
+//  Using the JavaScript language, have the function TripleDouble(num1,num2) take both parameters being passed, and return 1 if there is a straight triple of a number at any place in num1 and also a straight double of the same number in num2. For example: if num1 equals 451999277 and num2 equals 41177722899, then return 1 because in the first parameter you have the straight triple 999 and you have a straight double, 99, of the same number in the second parameter. If this isn't the case, return 0. 
+
+function tripleDouble(num1, num2) {
+   var triples = (String(num1).match(/([0-9])\1\1/g) || []).map(getRepeatingChar);
+   // Theres GOT to be a better way to do this...but it does work. The \1 means MATCHES THE (1 ago) CLAUSE. So we match the 1 ago and the 2 ago.
+   var doubles = (String(num2).match(/([0-9])\1/g) || []).map(getRepeatingChar);
+
+   // If there are any matches between the doubles and triples arrays
+   if (!(triples.length && doubles.length)) return 0;
+   else return triples.reduce(function(hasAnyDouble, value) {
+      return hasAnyDouble || doubles.indexOf(value) !== -1;
+   }, false); // Screw it I'm returning T/F here instead of 1/0. Not a minor change if I wanted to do 1/0 instead
+
+   // Note: the above isn't the most incredibly fast, b/c reduce will go through all the elements. If we wanted, we could do a manual loop instead as follows:
+   for (var i = 0; i < triples.length; i++) {
+      if doubles.indexOf(triples[i]) !== -1 return true;
+   }
+   return false;
+
+   function getRepeatingChar(element) { 
+      if (typeof element === "string") return element.charAt(0); 
+      else return null;
+   }
+}
+console.log(tripleDouble(451999277, 41177722899));
+console.log(tripleDouble(123, 1234));
+
+</script>
+</html>
