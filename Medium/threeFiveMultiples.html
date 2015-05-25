@@ -1,0 +1,62 @@
+<html>
+<script>
+
+// Assignment: http://coderbyte.com/CodingArea/GuestEditor.php?ct=ThreeFive%20Multiples&lan=JavaScript
+//  Using the JavaScript language, have the function threeFiveMultiples(num) return the sum of all the multiples of 3 and 5 that are below num. For example: if num is 10, the multiples of 3 and 5 that are below 10 are 3, 5, 6, and 9, and adding them up you get 23, so your program should return 23. The integer being passed will be between 1 and 100. 
+
+// Take 2: fun with functions
+function threeFiveFunctional(num) {
+   var genMultiples = function(multiple) {
+      return function(max) {
+         var multiples = [];
+         for (var i = multiple; i < max; i+= multiple) {
+            multiples.push(i);
+         }
+         return multiples;
+      }
+   };
+   // (Equivalent to this:). Could conceivably have scope implications tho
+/*   function genMultiples(multiple) {
+      return function(max) {
+         var multiples = [];
+         for (var i = multiple; i < max; i+= multiple) {
+            multiples.push(i);
+         }
+         return multiples;
+      }
+   }*/
+
+   var genMultiplesOfThree = genMultiples(3);
+   var genMultiplesOfFive = genMultiples(5);
+   return genMultiplesOfThree(num).concat(genMultiplesOfFive(num)).reduce(function(a, b) {
+      return a+b;
+   });
+}
+
+// Take 1: normal style
+function threeFiveMultiples(num) {
+   function genMultiples(multiple, max) {
+      var multiples = [];
+      for (var i = multiple; i < max; i+= multiple) {
+         multiples.push(i);
+      }
+      return multiples;
+   }
+
+   var threes = genMultiples(3, num);
+   var fives = genMultiples(5, num);
+   return threes.concat(fives).reduce(function(a, b) {
+      return a+b;
+   });
+   // equiv to:
+/*   return genMultiples(3, num).concat(genMultiples(5, num)).reduce(function(a, b) {
+      return a+b;
+   });*/
+}
+console.log(threeFiveMultiples(10));
+console.log(threeFiveFunctional(10));
+console.log(threeFiveMultiples(6));
+console.log(threeFiveFunctional(6));
+
+</script>
+</html>
