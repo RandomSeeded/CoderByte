@@ -1,0 +1,47 @@
+<html>
+<script>
+
+// Assignment: http://coderbyte.com/CodingArea/GuestEditor.php?ct=Coin%20Determiner&lan=JavaScript
+//  Using the JavaScript language, have the function CoinDeterminer(num) take the input, which will be an integer ranging from 1 to 250, and return an integer output that will specify the least number of coins, that when added, equal the input integer. Coins are based on a system as follows: there are coins representing the integers 1, 5, 7, 9, and 11. So for example: if num is 16, then the output should be 2 because you can achieve the number 16 with the coins 9 and 7. If num is 25, then the output should be 3 because you can achieve 25 with either 11, 9, and 5 coins or with 9, 9, and 7 coins. 
+
+// How can we go about this? Can we simply use the largest coin that will fit?
+// No, we cannot! For example, num == 15 is 3 coins: 5, 5, 5
+// But if we took the largest, we'd use 11 and then have to use 4 ones for 4 5 coins
+// So instead, we have to come up with all possible ways of equaling the target integer
+// And then find the one with the shortest length
+
+var coinValues = [1,5,7,9,11];
+function coinDeterminer(num) {
+   var coinSequences = [];
+   genCoinSequences(num, []);
+   function genCoinSequences(remainder, coinsUsed) {
+      // base case
+      if (remainder == 0) {
+         coinSequences.push(coinsUsed);
+      }
+      // recurse
+      else {
+         for (var i = 0; i < coinValues.length; i++) {
+            var coin = coinValues[i];
+               if (coin <= remainder) {
+               var _coinsUsed = coinsUsed.slice();
+               _coinsUsed.push(coin);
+               genCoinSequences(remainder-coin, _coinsUsed);
+            }
+         }
+      }
+   }
+/*   return coinSequences.reduce(function(min, current) {
+      if (min.length <= current.length) return min;
+      else return current;
+   }).length;*/
+
+   // Fun with Alternate output:
+   return coinSequences.map(function(element) { return element.length; }).reduce(function(a, b) { return (a <= b) ? a : b; });
+}
+console.log(coinDeterminer(16));
+console.log(coinDeterminer(15));
+console.log(coinDeterminer(25));
+
+</script>
+</html>

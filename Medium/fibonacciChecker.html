@@ -1,0 +1,20 @@
+<html>
+<script>
+
+// Assignment: http://coderbyte.com/CodingArea/GuestEditor.php?ct=Fibonacci%20Checker&lan=JavaScript 
+// Using the JavaScript language, have the function FibonacciChecker(num) return the string yes if the number given is part of the Fibonacci sequence. This sequence is defined by: Fn = Fn-1 + Fn-2, which means to find Fn you add the previous two numbers up. The first two numbers are 0 and 1, then comes 1, 2, 3, 5 etc. If num is not in the Fibonacci sequence, return the string no.  
+
+function fibonacciChecker(num) {
+   return genFib(0, 1, num);
+
+   function genFib(num1, num2, end) {
+      var num3 = num1+num2;
+      if (num3 === end) return true;
+      else if (num3 > end) return false;
+      else return genFib(num2, num3, end);
+   }
+}
+console.log(fibonacciChecker(34));
+console.log(fibonacciChecker(54));
+</script>
+</html>
