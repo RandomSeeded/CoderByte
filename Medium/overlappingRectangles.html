@@ -1,0 +1,70 @@
+<html>
+<script>
+
+// Assignment: http://coderbyte.com/CodingArea/GuestEditor.php?ct=Overlapping%20Rectangles&lan=JavaScript
+//  Using the JavaScript language, have the function OverlappingRectangles(strArr) read the strArr parameter being passed which will represent two rectangles on a Cartesian coordinate plane and will contain 8 coordinates with the first 4 making up rectangle 1 and the last 4 making up rectange 2. It will be in the following format: ["(0,0),(2,2),(2,0),(0,2),(1,0),(1,2),(6,0),(6,2)"] Your program should determine the area of the space where the two rectangles overlap, and then output the number of times this overlapping region can fit into the first rectangle. For the above example, the overlapping region makes up a rectangle of area 2, and the first rectangle (the first 4 coordinates) makes up a rectangle of area 4, so your program should output 2. The coordinates will all be integers. If there's no overlap between the two rectangles return 0. 
+
+// How do we go about this? How do we find the area that is overlapped?
+// Well, b/c we know that all the coordinates are integers, we can simply doubly loop over all possible coordinates (left/left to right/right) inside each rectangle, and keep track of all points that are present in both rectangles
+// Then we get left/left to right/right of those coordinates present inside both, and use those to calc the internal rectangle's dims
+
+function overlappingRectangles(strArr) {
+   // get the bottom-left and top-right values of our rectangle
+   function getKeyPoints(allCoords) {
+      var bottomLeft = allCoords[0], topRight = allCoords[0];
+      for (var i = 1; i < allCoords.length; i++) {
+         var thisCoord = allCoords[i];
+         if (thisCoord.row <= bottomLeft.row && thisCoord.col <= bottomLeft.col) { bottomLeft = thisCoord; }
+         else if (thisCoord.row >= topRight.row && thisCoord.col >= topRight.col) { topRight = thisCoord; }
+      }
+/*      return [bottomLeft, topRight];*/
+      return {bottomLeft: bottomLeft, topRight: topRight};
+   }
+   
+   // turn a string array into useful objects
+   function createPoints(strArr) {
+      var splitArr = strArr.replace(/[(\)]/g,"").split(",");
+      var allCoords = [];
+      var thisCoord = {};
+      for (var i = 0; i < splitArr.length; i++) {
+         if (thisCoord["row"] === undefined) { thisCoord.row = splitArr[i]; }
+         else { 
+            thisCoord["col"] = splitArr[i]; 
+            allCoords.push(thisCoord);
+            thisCoord = {};
+         }
+      }
+      return allCoords;
+   }
+
+   // Determines the area of the overlapping area between two rectangles (requires coords to be integers)
+   function getOverlap(rect1, rect2) {
+      var overlap = [];
+      for (var i = Math.min(rect1.bottomLeft.row, rect2.bottomLeft.row); i <= Math.max(rect1.topRight.row, rect2.topRight.row); i++) {
+         for (var j = Math.min(rect1.bottomLeft.col, rect2.bottomLeft.col); j <= Math.max(rect1.topRight.col, rect2.topRight.col); j++) {
+            var point = {row:i, col:j};
+            if (isInRectangle(point, rect1) && isInRectangle(point, rect2)) overlap.push(point);
+         }
+      }
+      return overlap;
+   }
+
+   // Determines whether a point is within a rectangle
+   function isInRectangle(point, rectangle) {
+      return (point.row >= rectangle.bottomLeft.row && point.col >= rectangle.bottomLeft.col && point.row <= rectangle.topRight.row && point.col <= rectangle.topRight.col);
+   }
+
+   // Gets area of a given rectangle
+   function getArea(rectangle) { return (rectangle.topRight.row - rectangle.bottomLeft.row) * (rectangle.topRight.col - rectangle.bottomLeft.col); }
+
+   // Solving logic: there is almost CERTAINLY a better way to have done this.
+   var rect1 = getKeyPoints(createPoints(strArr).slice(0, 4));
+   var rect2 = getKeyPoints(createPoints(strArr).slice(4));
+   return Math.floor(getArea(rect1) / getArea(getKeyPoints(getOverlap(rect1, rect2))));
+}
+console.log(overlappingRectangles("(0,0),(2,2),(2,0),(0,2),(1,0),(1,2),(6,0),(6,2)"));
+console.log(overlappingRectangles("(0,0),(0,-2),(3,0),(3,-2),(2,-1),(3,-1),(2,3),(3,3)"));
+console.log(overlappingRectangles("(0,0),(5,0),(0,2),(5,2),(2,1),(5,1),(2,-1),(5,-1)"));
+
+</script>
+</html>
