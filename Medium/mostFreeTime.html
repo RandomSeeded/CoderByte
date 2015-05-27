@@ -1,0 +1,35 @@
+<html>
+<script>
+
+// Assignment: http://coderbyte.com/CodingArea/GuestEditor.php?ct=Most%20Free%20Time&lan=JavaScript
+//  Using the JavaScript language, have the function MostFreeTime(strArr) read the strArr parameter being passed which will represent a full day and will be filled with events that span from time X to time Y in the day. The format of each event will be hh:mmAM/PM-hh:mmAM/PM. For example, strArr may be ["10:00AM-12:30PM","02:00PM-02:45PM","09:10AM-09:50AM"]. Your program will have to output the longest amount of free time available between the start of your first event and the end of your last event in the format: hh:mm. The start event should be the earliest event in the day and the latest event should be the latest event in the day. The output for the previous input would therefore be 01:30 (with the earliest event in the day starting at 09:10AM and the latest event ending at 02:45PM). The input will contain at least 3 events and the events may be out of order. 
+
+// Idea: sort the array so that they are IN order, then just get max
+function mostFreeTime(strArr) {
+   var sortedEvents = strArr.sort(sortFn);
+   // the good way
+   var maxFreeTime = 0;
+   for (var i = 1; i < sortedEvents.length; i++) {
+      maxFreeTime = Math.max(maxFreeTime, getTimeInMins(getStartTime(sortedEvents[i])) - getTimeInMins(getEndTime(sortedEvents[i-1])));
+   }
+   return (maxFreeTime < 600) ? "0"+(Math.floor(maxFreeTime / 60))+":"+(maxFreeTime % 60) : (Math.floor(maxFreeTime / 60))+":"+(maxFreeTime % 60);
+
+   function getStartTime(str) { return str.substr(0, 7); }
+   function getEndTime(str) { return str.substr(8); }
+   function sortFn(a, b) { return getTimeInMins(getStartTime(a)) > getTimeInMins(getStartTime(b)); }
+   function getTimeInMins(time) {
+      var hours = Number(time.substr(0, 2)); if (hours === 12) hours = 0;
+      var mins = Number(time.substr(3, 2));
+      var suffix = time.substr(5, 2);
+      var timeInMins = 60*hours + mins + (60*12*(suffix === "PM"));
+      return timeInMins;
+   }
+}
+console.log(mostFreeTime(["10:00AM-12:30PM","02:00PM-02:45PM","09:10AM-09:50AM"]));
+/*console.log(getTimeInMins("10:00AM"));
+console.log(getTimeInMins("10:00PM"));
+console.log(getTimeInMins("12:00AM"));
+console.log(getTimeInMins("12:30AM"));*/
+
+</script>
+</html>
