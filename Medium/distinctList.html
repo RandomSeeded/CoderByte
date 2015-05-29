@@ -1,0 +1,25 @@
+<html>
+<script>
+
+// Assignment: http://coderbyte.com/CodingArea/GuestEditor.php?ct=Distinct%20List&lan=JavaScript
+//  Using the JavaScript language, have the function DistinctList(arr) take the array of numbers stored in arr and determine the total number of duplicate entries. For example if the input is [1, 2, 2, 2, 3] then your program should output 2 because there are two duplicates of one of the elements. 
+
+// Can we abstract this? The inside, yes....we could definitely pass it a function....but the other 'stuff' around it not so much (e.g. the seen object, the initial value...also, if we did 'abstract' this, it would basically be a DO SOMETHING TO THE ARRAY...so we would have succesfully put a wrapper that accomplished nothing around a foreach. So...maybe not.
+
+// Take1
+function distinctList(arr) {
+   var seen = {};
+   return arr.reduce(function(numDupes, value) {
+      if (seen.hasOwnProperty(value)) return numDupes+1;
+      else {
+         seen[value] = true;
+         return numDupes;
+      }
+   },0);
+}
+console.log(distinctList([1,2,2,2,3]));
+console.log(distinctList([0,-2,-2,5,5,5]));
+console.log(distinctList([100,2,101,4]));
+
+</script>
+</html>
