@@ -1,0 +1,19 @@
+<html>
+<script>
+
+// Assignment: http://coderbyte.com/CodingArea/GuestEditor.php?ct=Number%20Encoding&lan=JavaScript
+//  Using the JavaScript language, have the function NumberEncoding(str) take the str parameter and encode the message according to the following rule: encode every letter into its corresponding numbered position in the alphabet. Symbols and spaces will also be used in the input. For example: if str is "af5c a#!" then your program should return 1653 1#!.
+
+// take 1: hey thats cool you can pass a function to replace :D
+function numberEncoding(str) {
+   return newStr = str.replace(/[a-z]/ig,function(match) {
+      return match.toLowerCase().charCodeAt(0) - "a".charCodeAt(0) + 1;
+   });
+}
+console.log(numberEncoding("af5c a#!"));
+console.log(numberEncoding("AF5C A#!"));
+console.log(numberEncoding("hello 45"));
+console.log(numberEncoding("jaj-a"));
+
+</script>
+</html>
